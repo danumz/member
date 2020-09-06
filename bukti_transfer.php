@@ -11,11 +11,11 @@ if (isset($_POST['transaksi'])) {
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         if ($ukuran < 1044070) {
             move_uploaded_file($file_tmp, 'bukti transfer/' . $nama);
-            $query = mysql_query("UPDATE tb_member SET file= '$nama' where id_user_member = '$id'");
+            $query = mysql_query("UPDATE tb_member SET file= '$nama' where id_member = '$_POST[idnya]'");
             echo $query;
             if ($query) {
-                echo "<script>window.alert('Maaf, Login anda Gagal !!!.');
-    				window.location='index.php?page=login'</script>";
+                echo "<script>window.alert('Berhasil !!!.');
+    				window.location='index.php?page=profil'</script>";
             } else {
                 echo "<script>window.alert('Maaf, Upload anda Gagal !!!.');</script>";
             }
@@ -43,16 +43,28 @@ if (isset($_POST['transaksi'])) {
     // }
 }
 ?>
+<style>
+    section {
+        margin: 0px !important
+    }
 
+    .aa {
+        margin-top: -90%
+    }
+</style>
 <article>
     <br>
+    <?php
+    $usernya = mysql_fetch_array(mysql_query("SELECT * FROM tb_member where id_user_member='$_SESSION[id_user]' AND status='tidak aktif'"));
+    ?>
     <form action='' method='POST' enctype="multipart/form-data">
-        <div class="card gray">
+        <div class="card gray" style="position: static !important;">
             <div class="container"><br>
-                <h5 class="center">Form Kirim Bukti Transfer</h5>
+                <h5 class="center">Form Kirim Bukti Transfer untuk member: <?= $usernya['id_member'] ?></h5>
                 <label for="user">Bukti Transfer (img/pdf)</label>
                 <br>
                 <br>
+                <input type="hidden" name="idnya" id="user" value="<?= $usernya['id_member'] ?>"><br>
                 <input type="file" name="user" id="user"><br>
                 <br>
                 <input class="btn blue" type="submit" value="Kirim" name="transaksi"><br><br>

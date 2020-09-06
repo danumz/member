@@ -108,7 +108,7 @@ if ($_GET[page] == 'kelolaberanda') {
 								<td align=center>$r[tanggal_awal]</td>
 								<td align=center>$tanggalnya</td>
 								<td  style='width:20% !important;margin:auto' align=center>
-									<a  href='index.php?page=kelolamember&aksi=aktif&id=$r[id_user_member]'><img src='http://localhost/membership/icon/icons8-xbox-x-24.png' /></a>
+									<a  href='index.php?page=kelolamember&aksi=aktif&id=$r[id_member]'><img src='http://localhost/membership/icon/icons8-xbox-x-24.png' /></a>
 									<a href='index.php?page=kelolamember&delete=$r[id_user_member]'><img src='http://localhost/membership/icon/icons8-trash-24.png' /></a>
 									<a href='index.php?page=kelolamember&edit=$r[id_member]'><img src='http://localhost/membership/icon/icons8-edit-24.png' /></a>
 									
@@ -121,7 +121,7 @@ if ($_GET[page] == 'kelolaberanda') {
 			if ($_SESSION[id_admin] == '') {
 				header('Location: index.php');
 			}
-			mysql_query("UPDATE tb_member SET status='nonaktif' where id_user_member='$_GET[id]'");
+			mysql_query("UPDATE tb_member SET status='tidak aktif' where id_member='$_GET[id]'");
 			echo "<script>window.alert('Sukses Nonaktifkan User Member Terpilih.');
 							window.location='index.php?page=kelolamember'</script>";
 		}
@@ -169,8 +169,8 @@ if ($_GET[page] == 'kelolaberanda') {
 							<td align=center>$r[nama_golongan_member]</td>
 							<td align=center width='25%'><a href='http://localhost/membership/bukti%20transfer/$r[file]' target='_blank'><img class='gambar' src='http://localhost/membership/bukti%20transfer/$r[file]'/></a></td>
 							<td align=center>
-								<a title='aktifkan' href='index.php?page=kelolacalonmember&aksi=aktif&id=$r[id_user_member]&golongan=$r[id_golongan_member]'><img width='40px' height='40px' src='http://localhost/membership/icon/icons8-attendance-50.png'/></a>
-								<a style='display: none' href='index.php?page=kelolacalonmember&delete=$r[id_user_member]'>Hapus</a>
+								<a title='aktifkan' href='index.php?page=kelolacalonmember&aksi=aktif&id=$r[id_member]&golongan=$r[id_golongan_member]'><img width='40px' height='40px' src='http://localhost/membership/icon/icons8-attendance-50.png'/></a>
+								<a style='display: none' href='index.php?page=kelolacalonmember&delete=$r[id_member]'>Hapus</a>
 
 							</td>
 					  </tr>";
@@ -201,7 +201,7 @@ if ($_GET[page] == 'kelolaberanda') {
 				// code...
 				break;
 		}
-		$queryk = mysqL_query("SELECT * FROM tb_member WHERE id_user_member='$_GET[id]'");
+		$queryk = mysqL_query("SELECT * FROM tb_member WHERE id_member='$_GET[id]'");
 		// echo $queryk;
 		$r = mysql_fetch_array($queryk);
 		// print_r($r);
@@ -216,7 +216,7 @@ if ($_GET[page] == 'kelolaberanda') {
 		if ($_SESSION[id_admin] == '') {
 			header('Location: index.php');
 		}
-		mysql_query("DELETE FROM tb_user where id_user_member='$_GET[delete]'");
+		mysql_query("DELETE FROM tb_member where id_member='$_GET[delete]'");
 		echo "<script>window.alert('Sukses Hapus User Member Terpilih.');
 						window.location='index.php?page=kelolacalonmember'</script>";
 	}

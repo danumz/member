@@ -4,7 +4,8 @@ if (isset($_POST['login'])) {
 	$passlgoin = md5($_POST['pass']);
 	$tanggal_sekarang = date("Y-m-d");
 	$login = mysql_query("SELECT * FROM tb_user 
-					where username='$userlogin' AND password='$passlgoin'");
+					INNER JOIN tb_member ON tb_user.id_user_member=tb_member.id_user_member
+					where tb_user.username='$userlogin' AND tb_user.password='$passlgoin'");
 	// print_r(mysql_fetch_assoc($login));
 	$cek = mysql_num_rows($login);
 	$r = mysql_fetch_assoc($login);
@@ -15,7 +16,7 @@ if (isset($_POST['login'])) {
 	if ($simpan['tanggal_akhir'] == $tanggal_sekarang) {
 		$query = mysql_query("UPDATE tb_member SET file= null, status='tidak aktif' where id_user_member = '$r[id_user_member]'");
 	}
-	if ($cek >= 1) {
+	if ($cek > 0) {
 		$_SESSION['id_user'] 	= $r['id_user_member'];
 		$_SESSION['nama_lengkap'] = $r['nama_lengkap'];
 		$_SESSION['status'] = $r['status_user'];

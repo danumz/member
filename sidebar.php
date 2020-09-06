@@ -6,8 +6,7 @@
 				<a href='index.php?page=kelolacalonmember'><button class='button btn green darken-1'>Kelola Calon member </button></a>
 				<a href='logout.php'><button class='button btn red darken-1'>Keluar</button></a> -->
 			<?php } else {
-				$usernya = mysql_fetch_array(mysql_query("SELECT * FROM tb_member where id_user_member='$_SESSION[id_user]'"));
-
+				$usernya = mysql_fetch_array(mysql_query("SELECT * FROM tb_member where id_user_member='$_SESSION[id_user]' AND status='tidak aktif'"));
 
 				if ($_SESSION[id_user] != '') {
 					echo "<div style='' class='aa'>";

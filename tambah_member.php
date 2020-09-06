@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 		`status`) 
 		VALUES (
 			$user_id,
-			$tanggal_sekarang,
+			'$tanggal_sekarang',
 			'$_POST[golongan]',
 			'$_POST[jenis_kendaraan]',
 			'$_POST[nomor_kendaraan]',
